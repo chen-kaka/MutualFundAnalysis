@@ -24,4 +24,13 @@ class ContactAdmin(admin.ModelAdmin):
 
 admin.site.register(Contact, ContactAdmin)
 admin.site.register([Test])
-admin.site.register([FundFinance, FundScale, FundConfig])
+
+class FundFinanceAdmin(admin.ModelAdmin):
+    list_display = ('code','name','time') # list
+class FundScaleAdmin(admin.ModelAdmin):
+    list_display = ('code','name','time') # list
+class FundConfigAdmin(admin.ModelAdmin):
+        list_display = ('code','name','time') # list
+admin.site.register(FundFinance, FundFinanceAdmin)
+admin.site.register(FundScale, FundScaleAdmin)
+admin.site.register(FundConfig, FundConfigAdmin)
