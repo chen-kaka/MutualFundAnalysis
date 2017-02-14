@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('TestModel', '0001_initial'),
+        ('Model', '0001_initial'),
     ]
 
     operations = [
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
-                ('contact', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='TestModel.Contact')),
+                ('contact', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='Model.Contact')),
             ],
         ),
     ]

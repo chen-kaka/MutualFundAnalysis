@@ -37,7 +37,7 @@ MutualFundAnalysis/wsgi.py: 一个 WSGI 兼容的 Web 服务器的入口，以�
 
 添加model:
 
-python manage.py startapp TestModel
+python manage.py startapp Model
 
 
 
@@ -77,9 +77,9 @@ python manage.py migrate
 
 数据创建成功:
 Operations to perform:
-  Apply all migrations: TestModel, admin, auth, contenttypes, sessions
+  Apply all migrations: Model, admin, auth, contenttypes, sessions
 Running migrations:
-  Applying TestModel.0001_initial... OK
+  Applying Model.0001_initial... OK
 
 重新运行服务:
 

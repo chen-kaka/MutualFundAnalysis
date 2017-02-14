@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from TestModel.models import Test,Contact,Tag
+from Model.models import Test,Contact,Tag
 
 # Register your models here.
 class TagInline(admin.TabularInline):
