@@ -1,8 +1,7 @@
 # MutualFundAnalysis
 MutualFund data Analysis service
 
-
-create python django project:
+### 初始安装库:
 
 sudo easy_install pip
 
@@ -10,14 +9,17 @@ sudo pip install Django==1.10.5
 
 django-admin.py startproject MutualFundAnalysis
 
+sudo pip install MySQL-python
 
-run project:
+sudo pip install requests
+
+### 项目运行:
 
 python manage.py runserver
 
 python manage.py runserver 0.0.0.0:8000
 
-项目结构:
+### 项目结构:
 
 MutualFundAnalysis: 项目的容器。
 
@@ -51,11 +53,7 @@ export PATH=${PATH}:/usr/local/mysql/bin
 
 source ~/.bash_profile
 
-install MySQL-python
-
-sudo pip install MySQL-python
-
-创建数据库:
+### 创建数据库:
 
 python manage.py migrate
 
@@ -100,7 +98,7 @@ ImportError: No module named context_processors
 from django.views.decorators import csrf
 
 
-管理后台:
+### 管理后台:
 
 1、创建超级用户:
 

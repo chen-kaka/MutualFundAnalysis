@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """DjangoProj URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,6 +19,7 @@ from django.contrib import admin
 from MutualFundAnalysis.view import hello
 from MutualFundAnalysis.testdb import testdb,testdbList,testdbUpdate,testdbDelete
 from MutualFundAnalysis import search
+from MutualFundAnalysis.Service import fetchMutualData
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +31,6 @@ urlpatterns = [
     url(r'^search-form/$', search.search_form),
     url(r'^search/$', search.search),
     url(r'^search-post/$', search.search_post),
+    # 基金信息获取
+    url(r'^fetch_mutual_data/$', fetchMutualData.fetchMutualDataReq)
 ]
