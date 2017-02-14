@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^search/$', search.search),
     url(r'^search-post/$', search.search_post),
     # 基金信息获取
-    url(r'^fetch_mutual_data/$', fetchMutualData.fetchMutualDataReq)
+    # http://localhost:8000/mutual_fund/fetch_data
+    url(r'^mutual_fund/fetch_data/$', fetchMutualData.fetchMutualDataReq)
 ]

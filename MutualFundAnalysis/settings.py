@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'MutualFundAnalysis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  #  or mysql.connector.django
-        'NAME': 'test',
+        'NAME': 'mutualfund',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST':'localhost',

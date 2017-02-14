@@ -55,6 +55,8 @@ source ~/.bash_profile
 
 ### 创建数据库:
 
+CREATE DATABASE IF NOT EXISTS mutualfund default charset utf8 COLLATE utf8_general_ci;
+
 python manage.py migrate
 
 注意:syncdb is deprecated because of the migration system.
@@ -109,6 +111,8 @@ python manage.py createsuperuser
 
 2、访问:
 http://127.0.0.1:8000/admin/
+
+admin/admin123
 
 uwsgi:
 

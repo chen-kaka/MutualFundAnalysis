@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from Model.models import Test,Contact,Tag
+from Model.mutualfund import FundFinance,FundScale,FundConfig
 
 # Register your models here.
 class TagInline(admin.TabularInline):
@@ -23,3 +24,4 @@ class ContactAdmin(admin.ModelAdmin):
 
 admin.site.register(Contact, ContactAdmin)
 admin.site.register([Test])
+admin.site.register([FundFinance, FundScale, FundConfig])
