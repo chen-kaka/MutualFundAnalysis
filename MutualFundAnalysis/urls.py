@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from DjangoProj.view import hello
-from DjangoProj.testdb import testdb,testdbList,testdbUpdate,testdbDelete
-from DjangoProj import search
+from MutualFundAnalysis.view import hello
+from MutualFundAnalysis.testdb import testdb,testdbList,testdbUpdate,testdbDelete
+from MutualFundAnalysis import search
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

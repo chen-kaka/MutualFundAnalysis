@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'DjangoProj.urls'
+ROOT_URLCONF = 'MutualFundAnalysis.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'DjangoProj.wsgi.application'
+WSGI_APPLICATION = 'MutualFundAnalysis.wsgi.application'
 
 
 # Database
