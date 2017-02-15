@@ -89,3 +89,28 @@ class FundNetData(models.Model):
     yesterday_nav = models.FloatField()
     def __unicode__(self):
         return self.sname
+
+# 银行黄金数据
+# "variety":"美元账户黄金",
+# "midpri":"1226.10",
+# "buypri":"1224.60",
+# "sellpri":"1227.60",
+# "maxpri":"1230.58",
+# "minpri":"1222.56",
+# "todayopen":"1223.02",
+# "closeyes":"1223.61",
+# "quantpri":"1.00",
+# "time":"2017-02-15 19:07:00.0"
+class BankGoldData(models.Model):
+    variety = models.CharField(max_length=200)
+    midpri = models.FloatField()
+    buypri = models.FloatField()
+    sellpri = models.FloatField()
+    maxpri = models.FloatField()
+    minpri = models.FloatField()
+    todayopen = models.FloatField()
+    closeyes = models.FloatField()
+    quantpri = models.FloatField()
+    time = models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.variety

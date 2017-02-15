@@ -3,8 +3,6 @@
 from Model.mutualfund import FundFinance, FundConfig, FundScale
 from common import convertStringToFloat, fetchJuheData
 
-# openid
-OpenId = "JH86031efde94c219e84552800e01747f7"
 # 主要财务指标
 FundFinanceUrl = "http://web.juhe.cn:8080/fund/findata/main"
 FundFinanceAppkey = "0c9511364511315c978dd45a22c7b271"
