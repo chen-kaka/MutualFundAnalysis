@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-import requests
-import json
-from django.http import HttpResponse
+
 from Model.mutualfund import FundFinance, FundConfig, FundScale
+from common import convertStringToFloat, fetchJuheData
 
 # openid
 OpenId = "JH86031efde94c219e84552800e01747f7"
@@ -18,7 +17,7 @@ FundScaleAppkey = "0c9511364511315c978dd45a22c7b271"
 FundConfigUrl = "http://web.juhe.cn:8080/fund/findata/config"
 FundConfigAppkey = "0c9511364511315c978dd45a22c7b271"
 
-def fetchMutualDataReq(request):
+def fetchMutualFundData():
     fundFinanceData = fetchMutualData(FundFinanceUrl, FundFinanceAppkey)
     fundScaleData = fetchMutualData(FundScaleUrl, FundScaleAppkey)
     fundConfigData = fetchMutualData(FundConfigUrl, FundConfigAppkey)
@@ -102,28 +101,11 @@ def fetchMutualDataReq(request):
         "fundScale" : len(fundScaleData),
         "fundConfig" : len(fundConfigData)
     }
-    return HttpResponse(json.dumps(responseData), content_type="application/json")
-
-#转字符串为float
-def convertStringToFloat(str):
-    if str == None or str == "--" or str == "":
-        return 0
-    str = str.replace(",","")
-    return float(str)
+    return responseData
 
 def fetchMutualData(reqUrl, appkey):
     params = {
         "key" : appkey, #APPKEY值
     }
-    responseHtml = requests.post(reqUrl, data=params)
-    responseJson = responseHtml.json()
-    # print responseJson.text
-    if responseJson["error_code"] == 0 :
-        print "send reqUrl: " , reqUrl , ", fetch success."
-        responseResult = responseJson["result"]
-        if len(responseResult) > 0:
-            responseResult = responseResult[0]
-            print "reqUrl: " , reqUrl + ", fetch list size: " , len(responseResult)
-            return responseResult
-    return {}
+    return fetchJuheData(reqUrl, appkey, params)
 

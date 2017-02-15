@@ -64,3 +64,28 @@ class FundConfig(models.Model):
     time = models.CharField(max_length=50)
     def __unicode__(self):
         return self.name
+
+# 净值数据
+# "jjlx":"偏股型基金",
+# "nav_a":"0.0028",
+# "nav_date":"2017-02-14",
+# "nav_rate":"0.2537",
+# "per_nav":"1.1066",
+# "sg_states":"开放",
+# "sname":"泰达宏利首选企业股票",
+# "symbol":"162208",
+# "total_nav":"1.8266",
+# "yesterday_nav":"1.1038"
+class FundNetData(models.Model):
+    symbol = models.CharField(max_length=50)
+    sname = models.CharField(max_length=200)
+    jjlx = models.CharField(max_length=100)
+    nav_a = models.FloatField()
+    nav_date = models.CharField(max_length=100)
+    nav_rate = models.FloatField()
+    per_nav = models.FloatField()
+    sg_states = models.CharField(max_length=100)
+    total_nav = models.FloatField()
+    yesterday_nav = models.FloatField()
+    def __unicode__(self):
+        return self.sname

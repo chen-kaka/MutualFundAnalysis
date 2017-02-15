@@ -19,7 +19,7 @@ from django.contrib import admin
 from MutualFundAnalysis.view import hello
 from MutualFundAnalysis.testdb import testdb,testdbList,testdbUpdate,testdbDelete
 from MutualFundAnalysis import search
-from MutualFundAnalysis.Service import fetchMutualData
+from MutualFundAnalysis.Controller import fetchMutualData
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -33,5 +33,7 @@ urlpatterns = [
     url(r'^search-post/$', search.search_post),
     # 基金信息获取
     # http://localhost:8000/mutual_fund/fetch_data
-    url(r'^mutual_fund/fetch_data/$', fetchMutualData.fetchMutualDataReq)
+    url(r'^mutual_fund/fetch_data/$', fetchMutualData.fetchMutualFundDataReq),
+    # http://localhost:8000/mutual_fund/fetch_net_data
+    url(r'^mutual_fund/fetch_net_data/$', fetchMutualData.fetchMutualFundNetDataReq)
 ]
