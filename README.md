@@ -13,6 +13,8 @@ sudo pip install MySQL-python
 
 sudo pip install requests
 
+sudo pip install django-crontab
+
 ### 项目运行:
 
 python manage.py runserver
@@ -122,3 +124,18 @@ uwsgi:
 
 3、uwsgi --ini /etc/uwsgi9090.ini &
   /usr/local/nginx/sbin/nginx
+
+
+### 定时任务
+
+每次添加或修改定时任务后更新:
+
+python manage.py crontab add
+
+移除所有任务:
+
+python manage.py crontab remove
+
+查看已经激活的任务使用:
+
+python manage.py crontab show

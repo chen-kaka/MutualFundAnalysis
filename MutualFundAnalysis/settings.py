@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Model',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CRONJOBS = (
+    ('* * * * *', 'Crontab.scheduleFetchFundData.testScheduler', '> /Users/kakachan/src/mine/quant/MutualFundAnalysis/Logs/scheduled_job.log'),
+)
