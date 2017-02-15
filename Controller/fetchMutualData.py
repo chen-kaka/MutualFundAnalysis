@@ -2,8 +2,8 @@
 
 import json
 from django.http import HttpResponse
+from Service import fetchFundData,fetchNetData
 
-from MutualFundAnalysis.Service import fetchFundData, fetchNetData
 
 #拉取基金基本数据
 def fetchMutualFundDataReq(request):

@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from MutualFundAnalysis.view import hello
-from MutualFundAnalysis.testdb import testdb,testdbList,testdbUpdate,testdbDelete
+
+from Controller import fetchMutualData
 from MutualFundAnalysis import search
-from MutualFundAnalysis.Controller import fetchMutualData
+from MutualFundAnalysis.testdb import testdb,testdbList,testdbUpdate,testdbDelete
+from MutualFundAnalysis.view import hello
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
