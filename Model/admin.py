@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from Model.models import Test,Contact,Tag
-from Model.mutualfund import FundFinance,FundScale,FundConfig,FundNetData
+from Model.mutualfund import FundFinance,FundScale,FundConfig,FundNetData,BankGoldData
 
 # Register your models here.
 class TagInline(admin.TabularInline):
@@ -33,7 +33,11 @@ class FundConfigAdmin(admin.ModelAdmin):
         list_display = ('code','name','time') # list
 class FundNetDataAdmin(admin.ModelAdmin):
     list_display = ('symbol','sname','nav_date','jjlx') # list
+class BankGoldDataAdmin(admin.ModelAdmin):
+    list_display = ('variety','midpri','todayopen','closeyes','time') # list
+
 admin.site.register(FundFinance, FundFinanceAdmin)
 admin.site.register(FundScale, FundScaleAdmin)
 admin.site.register(FundConfig, FundConfigAdmin)
 admin.site.register(FundNetData, FundNetDataAdmin)
+admin.site.register(BankGoldData, BankGoldDataAdmin)
