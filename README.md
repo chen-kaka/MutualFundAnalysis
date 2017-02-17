@@ -3,17 +3,25 @@ MutualFund data Analysis service
 
 ### 初始安装库:
 
-sudo easy_install pip
+    sudo easy_install pip
 
-sudo pip install Django==1.10.5
+    sudo pip install Django==1.10.5
 
-django-admin.py startproject MutualFundAnalysis
+    django-admin.py startproject MutualFundAnalysis
 
-sudo pip install MySQL-python
+    sudo pip install MySQL-python
 
-sudo pip install requests
+    sudo pip install requests
 
-sudo pip install django-crontab
+    sudo pip install django-crontab
+
+scrapy:
+
+    brew install python
+    xcode-select --install
+    sudo pip install scrapy
+
+
 
 ### 项目运行:
 
