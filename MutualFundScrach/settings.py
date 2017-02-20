@@ -14,6 +14,7 @@ BOT_NAME = 'MutualFundScrach'
 SPIDER_MODULES = ['MutualFundScrach.spiders']
 NEWSPIDER_MODULE = 'MutualFundScrach.spiders'
 
+LOG_LEVEL = 'INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'MutualFundScrach (+http://www.yourdomain.com)'
