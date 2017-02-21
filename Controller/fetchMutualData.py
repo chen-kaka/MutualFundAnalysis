@@ -22,5 +22,9 @@ def fetchBankGoldDataReq(request):
 
 #拉取排名数据
 def fetchFundRatingReq(request):
-    responseData = Requester.pagingFechMutualFundRatingData()
+    request.encoding='utf-8'
+    reqDate = ''
+    if 'date' in request.GET:
+        reqDate = request.GET['date'].encode('utf-8')
+    responseData = Requester.pagingFechMutualFundRatingData(reqDate)
     return HttpResponse(json.dumps(responseData), content_type="application/json")
