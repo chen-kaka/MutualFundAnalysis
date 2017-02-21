@@ -21,3 +21,18 @@ class TencentItem(Item):
     recruitNumber = Field()       # 招聘人数
     detailLink = Field()          # 职位详情页链接
     publishTime = Field()         # 发布时间
+
+class MutualFundRatingItem(Item):
+    code = Field()                # 基金代码
+    name = Field()                # 基金名称
+    nav = Field()                 # 单位净值
+    StarRating3 = Field()         # 晨星三年评级
+    StarRating5 = Field()         # 晨星五年评级
+    SD3Year = Field()             # 三年波动幅度
+    SD3YearComment = Field()      # 三年波动幅度评价
+    DR3Year = Field()             # 三年晨星风险系数
+    DR3YearComment = Field()      # 三年晨星风险系数评价
+    SR3Year = Field()             # 三年夏普比例
+    SR3YearComment = Field()      # 三年夏普比例评价
+    ReturnYTD = Field()           # 今年总回报率
+    ranking = Field()             # 排名

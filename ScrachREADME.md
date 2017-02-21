@@ -20,4 +20,6 @@ https://github.com/maxliaops/scrapy-itzhaopin
 
 - 运行
 
-scrapy crawl tencent
+scrapy crawl tencent -o tencent.json -t json
+
+scrapy crawl mutualfund-rating -o fundrating.json -t json

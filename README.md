@@ -21,7 +21,21 @@ scrapy:
     xcode-select --install
     sudo pip install scrapy
 
+beautifulsoup:
 
+    sudo pip install beautifulsoup4
+
+安装virtualenv:
+
+sudo pip install virtualenv
+
+virtualenv --no-site-packages venv
+
+source venv/bin/activate
+
+使用deactivate命令退出当前的venv环境。
+
+http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432712108300322c61f256c74803b43bfd65c6f8d0d0000
 
 ### 项目运行:
 
