@@ -15,7 +15,7 @@ MutualFund data Analysis service
 
     sudo pip install django-crontab
 
-scrapy:
+scrapy(暂时不用):
 
     brew install python
     xcode-select --install
@@ -29,9 +29,20 @@ beautifulsoup:
 
 sudo pip install virtualenv
 
-virtualenv --no-site-packages venv
+virtualenv --no-site-packages virtualenv
 
-source venv/bin/activate
+source virtualenv/bin/activate
+
+### 安装各种依赖库:
+
+    source virtualenv/bin/activate
+    pip install Django==1.10.5
+    pip install beautifulsoup4
+    pip install requests
+    pip install MySQL-python
+    pip install lxml
+    pip install django-crontab
+    deactivate
 
 使用deactivate命令退出当前的venv环境。
 
