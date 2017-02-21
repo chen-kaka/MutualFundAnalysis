@@ -10,6 +10,7 @@ from django.db import models
 class MutualFundRating(models.Model):
     code = models.CharField(max_length=50)               # 基金代码
     name = models.CharField(max_length=200)                # 基金名称
+    fundType = models.CharField(max_length=100)                # 基金类型
     nav = models.FloatField()              # 单位净值
     StarRating3 = models.FloatField()         # 晨星三年评级
     StarRating5 = models.FloatField()         # 晨星五年评级

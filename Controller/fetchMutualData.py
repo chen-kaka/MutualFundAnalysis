@@ -26,5 +26,5 @@ def fetchFundRatingReq(request):
     reqDate = ''
     if 'date' in request.GET:
         reqDate = request.GET['date'].encode('utf-8')
-    responseData = Requester.pagingFechMutualFundRatingData(reqDate)
+    responseData = Requester.categoryFetchMutualFundRatingData(reqDate)
     return HttpResponse(json.dumps(responseData), content_type="application/json")
