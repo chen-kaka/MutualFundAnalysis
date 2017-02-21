@@ -2,7 +2,6 @@
 
 import requests
 from bs4 import BeautifulSoup
-import lxml
 
 def requestData(reqUrl):
     responseHtml = requests.get(reqUrl)
@@ -17,15 +16,16 @@ def fetchMutualFundRatingData():
     pagesize = 20
     reqUrl = url + "&date=" + date + "&pageindex=" + bytes(pageindex) + "&pagesize=" + bytes(pagesize)
     print "reqUrl is:", reqUrl
-    # responseHtml = requestData(reqUrl)
-    # print "responseHtml is: ", responseHtml
-    tt = open("/Users/kakachan/Desktop/fundranking.ashx.htm");
-    # soup = BeautifulSoup(responseHtml.text, "html.parser")
-    soup = BeautifulSoup(tt, "lxml")
+    responseHtml = requestData(reqUrl)
+
+    # tt = open("/Users/kakachan/Desktop/fundranking.ashx.htm")
+    # soup = BeautifulSoup(tt, "lxml")
+
+    soup = BeautifulSoup(responseHtml.text, "lxml") #"html.parser")
+
 
     # print soup.prettify()
     targetTable = soup.findAll("table",class_="fr_tablecontent")
-    # print targetTable
     trs = targetTable[0].findAll('tr')
     for index in range(0,len(trs)-1):
         tr = trs[index]
