@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# import re
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -89,14 +90,21 @@ def fetchMutualFundRatingData(category,categoryName, date, pageindex, pagesize):
             print "get BankGoldData saved info is null, create new one."
             newMutualFundRating = MutualFundRating(code=code)
 
+        # for i in range(1,(len(tds))):
+        #     td = tds[i]
+        #     print td.get_text()
+
+        rating3 = getRating(tds[4])
+        rating5 = getRating(tds[5])
+        print "rating3:",rating3,"rating5:",rating5
         i = 2
         newMutualFundRating.name = tds[i].get_text()
         i += 1
         newMutualFundRating.nav = convertStringToFloat(tds[i].get_text())
         i += 1
-        newMutualFundRating.StarRating3 = convertStringToFloat(tds[i].get_text())
+        newMutualFundRating.StarRating3 = rating3 # convertStringToFloat(tds[i].get_text())
         i += 1
-        newMutualFundRating.StarRating5 = convertStringToFloat(tds[i].get_text())
+        newMutualFundRating.StarRating5 = rating5 # convertStringToFloat(tds[i].get_text())
         i += 1
         newMutualFundRating.SD3Year = convertStringToFloat(tds[i].get_text())
         i += 1
@@ -116,7 +124,26 @@ def fetchMutualFundRatingData(category,categoryName, date, pageindex, pagesize):
         print "newMutualFundRating is:",newMutualFundRating
         newMutualFundRating.save()
     return totalCount
-        # for i in range(1,(len(tds))):
-        #     td = tds[i]
-        #     print td.get_text()
+
     # tr = soup.find('tr',attrs={"onmouseout": "this.style.background=''"})
+
+# categoryFetchMutualFundRatingData()
+
+def getRating(imgTag):
+    imgTags = imgTag.findAll('img')
+    rating = 0
+    if len(imgTags) == 2:
+        imgsrc = imgTags[0].get('src')
+        if imgsrc.find("0") != -1:
+            rating = 0
+        elif imgsrc.find("1") != -1:
+            rating = 1
+        elif imgsrc.find("2") != -1:
+            rating = 2
+        elif imgsrc.find("3") != -1:
+            rating = 3
+        elif imgsrc.find("4") != -1:
+            rating = 4
+        elif imgsrc.find("5") != -1:
+            rating = 5
+    return rating

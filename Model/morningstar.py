@@ -16,9 +16,9 @@ class MutualFundRating(models.Model):
     StarRating5 = models.FloatField()         # 晨星五年评级
     SD3Year = models.FloatField()            # 三年波动幅度
     SD3YearComment = models.CharField(max_length=200)      # 三年波动幅度评价
-    DR3Year = models.FloatField()           # 三年晨星风险系数
+    DR3Year = models.FloatField()           # 三年晨星风险系数,  越低越好
     DR3YearComment = models.CharField(max_length=200)      # 三年晨星风险系数评价
-    SR3Year = models.FloatField()            # 三年夏普比例
+    SR3Year = models.FloatField()            # 三年夏普比例,  越高越好
     SR3YearComment = models.CharField(max_length=200)      # 三年夏普比例评价
     ReturnYTD = models.FloatField()           # 今年总回报率
     updateDate = models.CharField(max_length=200)

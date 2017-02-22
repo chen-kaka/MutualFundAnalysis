@@ -39,6 +39,6 @@ urlpatterns = [
     url(r'^mutual_fund/fetch_net_data/$', fetchMutualData.fetchMutualFundNetDataReq),
     # http://localhost:8000/mutual_fund/fetch_bank_gold_data
     url(r'^mutual_fund/fetch_bank_gold_data/$', fetchMutualData.fetchBankGoldDataReq),
-    # http://localhost:8000/mutual_fund/fetch_rating
+    # http://localhost:8000/mutual_fund/fetch_rating?date=2017-02-17
     url(r'^mutual_fund/fetch_rating/$', fetchMutualData.fetchFundRatingReq)
 ]
