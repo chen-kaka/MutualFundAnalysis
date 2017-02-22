@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 #转字符串为float
 def convertStringToFloat(str):
@@ -9,6 +12,14 @@ def convertStringToFloat(str):
     str = str.replace(",","")
     return float(str)
 
+#转字符串为float
+def convertStringToFloatQoutExclude(str):
+    if str == None or str == "--" or str == "" or str == "-":
+        return 0
+    str = str.replace(",","")
+    str = str.replace("(份)","")
+    str = str.replace("$","")
+    return float(str)
 
 def fetchJuheData(reqUrl, appkey, params):
     responseHtml = requests.post(reqUrl, data=params)

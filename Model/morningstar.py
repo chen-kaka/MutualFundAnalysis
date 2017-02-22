@@ -24,3 +24,36 @@ class MutualFundRating(models.Model):
     updateDate = models.CharField(max_length=200)
     def __unicode__(self):
         return self.name
+
+
+#晨星基金购买信息
+class MutualFundBuyInfo(models.Model):
+    code = models.CharField(max_length=50)                  # 基金代码
+    name = models.CharField(max_length=200)                 # 基金名称
+    establishDate = models.CharField(max_length=200)         # 成立日期
+    applyState = models.CharField(max_length=200)             # 申购状态
+    returnState = models.CharField(max_length=200)         # 赎回状态
+    minBuy = models.FloatField()                           # 最小投资额
+    frontCharge = models.FloatField()                       # 前端收费
+    backCharge = models.FloatField()                       # 后端收费
+    redeemFee = models.FloatField()                      # 赎回费
+    manageFee = models.FloatField()                       # 管理费
+    trusteeFee = models.FloatField()                      # 托管费
+    serviceFee = models.FloatField()                      # 销售服务费
+    updateDate = models.CharField(max_length=200)         #更新日期
+    def __unicode__(self):
+        return self.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
