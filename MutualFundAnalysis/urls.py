@@ -42,5 +42,7 @@ urlpatterns = [
     # http://localhost:8000/mutual_fund/fetch_rating?date=2017-02-17
     url(r'^mutual_fund/fetch_rating/$', fetchMutualData.fetchFundRatingReq),
     # http://localhost:8000/mutual_fund/fetch_buyinfo
-    url(r'^mutual_fund/fetch_buyinfo/$', fetchMutualData.fetchFundBuyInfoReq)
+    url(r'^mutual_fund/fetch_buyinfo/$', fetchMutualData.fetchFundBuyInfoReq),
+    # http://localhost:8000/mutual_fund/fetch_returninfo
+    url(r'^mutual_fund/fetch_returninfo/$', fetchMutualData.fetchFundReturnInfoReq)
 ]

@@ -45,6 +45,34 @@ class MutualFundBuyInfo(models.Model):
         return self.name
 
 
+#晨星基金回报信息
+class MutualFundReturnInfo(models.Model):
+    code = models.CharField(max_length=50)                  # 基金代码
+    name = models.CharField(max_length=200)                 # 基金名称
+    oneDayReturn = models.FloatField()                     # 一天回报
+    oneWeekReturn = models.FloatField()                       # 1周回报
+    oneMonthReturn = models.FloatField()                     # 1个月回报
+    threeMonthReturn = models.FloatField()                     # 3个月回报
+    sixMonthReturn = models.FloatField()                       # 6个月回报
+    oneYearReturn = models.FloatField()                       # 1年回报
+    twoYearReturn = models.FloatField()                      # 2年年化回报
+    threeYearReturn = models.FloatField()                       # 3年年化回报
+    fiveYearReturn = models.FloatField()                      # 5年年化回报
+    tenYearReturn = models.FloatField()                      # 10年年化回报
+    totalReturn = models.FloatField()                       #设立以来回报
+    threeYearStandard = models.FloatField()                #三年标准差
+    threeYearRisk = models.FloatField()                     #三年晨星风险系数
+    updateDate = models.CharField(max_length=200)         #更新日期
+    def __unicode__(self):
+        return self.name
+
+
+
+
+
+
+
+
 
 
 

@@ -3,7 +3,7 @@
 import json
 from django.http import HttpResponse
 from Service import fetchFundData,fetchNetData,fetchBankGoldData
-from DataCrawler import Requester,FundBuyinfo
+from DataCrawler import Requester,FundBuyinfo,FundReturnInfo
 
 #拉取基金基本数据
 def fetchMutualFundDataReq(request):
@@ -33,4 +33,10 @@ def fetchFundRatingReq(request):
 def fetchFundBuyInfoReq(request):
     request.encoding='utf-8'
     responseData = FundBuyinfo.pagingFetchMutualFundBuyData()
+    return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+#拉取回报数据
+def fetchFundReturnInfoReq(request):
+    request.encoding='utf-8'
+    responseData = FundReturnInfo.pagingFetchMutualFundReturnData()
     return HttpResponse(json.dumps(responseData), content_type="application/json")
