@@ -66,7 +66,22 @@ class MutualFundReturnInfo(models.Model):
     def __unicode__(self):
         return self.name
 
-
+#晨星经理信息
+class MutualFundManagerInfo(models.Model):
+    code = models.CharField(max_length=50)                  # 基金代码
+    name = models.CharField(max_length=200)                 # 基金名称
+    fundType = models.CharField(max_length=200)                # 基金类型
+    fundScale = models.FloatField()                       # 基金规模(亿)
+    manager = models.CharField(max_length=200)                     # 基金经理
+    totalStart = models.DateField()                     # 累计公募任职开始时间
+    totalLength = models.IntegerField()                     # 累计公募任职长度
+    manageStart = models.DateField()                       # 任职开始时间
+    manageLength = models.IntegerField()                       # 任职长度
+    manageAchive = models.FloatField()                       # 管理期业绩
+    manageAvgAchive = models.FloatField()                      # 管理期同类平均业绩
+    updateDate = models.CharField(max_length=200)         #更新日期
+    def __unicode__(self):
+        return self.name
 
 
 
