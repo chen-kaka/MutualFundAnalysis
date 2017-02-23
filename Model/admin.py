@@ -37,9 +37,9 @@ class FundNetDataAdmin(admin.ModelAdmin):
 class BankGoldDataAdmin(admin.ModelAdmin):
     list_display = ('variety','midpri','todayopen','closeyes','time') # list
 class MutualFundRatingAdmin(admin.ModelAdmin):
-    list_display = ('code','name','fundType','StarRating3','StarRating5') # list
+    list_display = ('code','name','fundType','StarRating3','StarRating5','SD3Year','DR3Year','SR3Year','ReturnYTD') # list
 class MutualFundBuyInfoAdmin(admin.ModelAdmin):
-    list_display = ('code','name','establishDate','applyState','returnState') # list
+    list_display = ('code','name','establishDate','applyState','returnState','frontCharge','backCharge','redeemFee','manageFee') # list
 class MutualFundReturnInfoAdmin(admin.ModelAdmin):
     list_display = ('code','name','oneDayReturn','oneMonthReturn','sixMonthReturn','oneYearReturn','threeYearReturn','updateDate') # list
 
