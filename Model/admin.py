@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from Model.models import Test,Contact,Tag
 from Model.mutualfund import FundFinance,FundScale,FundConfig,FundNetData,BankGoldData
-from Model.morningstar import MutualFundRating,MutualFundBuyInfo
+from Model.morningstar import MutualFundRating,MutualFundBuyInfo,MutualFundReturnInfo
 
 # Register your models here.
 class TagInline(admin.TabularInline):
@@ -40,6 +40,8 @@ class MutualFundRatingAdmin(admin.ModelAdmin):
     list_display = ('code','name','fundType','StarRating3','StarRating5') # list
 class MutualFundBuyInfoAdmin(admin.ModelAdmin):
     list_display = ('code','name','establishDate','applyState','returnState') # list
+class MutualFundReturnInfoAdmin(admin.ModelAdmin):
+    list_display = ('code','name','oneDayReturn','oneMonthReturn','sixMonthReturn','oneYearReturn','threeYearReturn','updateDate') # list
 
 admin.site.register(FundFinance, FundFinanceAdmin)
 admin.site.register(FundScale, FundScaleAdmin)
@@ -48,3 +50,4 @@ admin.site.register(FundNetData, FundNetDataAdmin)
 admin.site.register(BankGoldData, BankGoldDataAdmin)
 admin.site.register(MutualFundRating, MutualFundRatingAdmin)
 admin.site.register(MutualFundBuyInfo, MutualFundBuyInfoAdmin)
+admin.site.register(MutualFundReturnInfo, MutualFundReturnInfoAdmin)
