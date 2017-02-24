@@ -12,7 +12,7 @@ def convertStringToFloat(str):
     str = str.replace(",","")
     return float(str)
 
-def convertDateStringToInt(str): # xxd[3年315天] or [3年315天]  or 3年315天 or 315天
+def convertDateStringToInt(str): # xxd[3年315天] or [3年315天]  or 3年315天 or 315天 or 1年
     if str == None or str == "--" or str == "" or str == "-":
         return 0
     str = str.replace(" ","")
@@ -22,8 +22,10 @@ def convertDateStringToInt(str): # xxd[3年315天] or [3年315天]  or 3年315�
     #切成两份
     yearsAndDays = str.split('年')
     if len(yearsAndDays) == 1:
-        return int(yearsAndDays[0])
+            return int(yearsAndDays[0])
     print "yearsAndDays[0]:",yearsAndDays[0],"yearsAndDays[1]:",yearsAndDays[1]
+    if yearsAndDays[1] == '':  #只有年没有天
+        return int(yearsAndDays[0]) * 365
     return int(yearsAndDays[0]) * 365 + int(yearsAndDays[1])
 
 #转字符串为float

@@ -13,6 +13,7 @@ def fetchMutualFundManagerData():
     print "reqUrl is:", reqUrl
 
     tmp = open("/Users/kakachan/Desktop/fundmanager.htm")
+    print "BeautifulSoup processing."
     soup = BeautifulSoup(tmp, "lxml")
 
     # responseHtml = requestData(reqUrl)
@@ -21,6 +22,7 @@ def fetchMutualFundManagerData():
     # print soup.prettify()
 
     targetTables = soup.findAll("table",style="width:100%; border-collapse:collapse;")
+    print "targetTables length: ",len(targetTables)
     for ind in range(0,len(targetTables)):
         targetTable = targetTables[ind]
         # print "targetTable:",targetTable
@@ -44,34 +46,26 @@ def fetchMutualFundManagerData():
 
             i = 1
             newMutualFundManagerInfo.name = tds[i].find("a").get_text()
-            print "code:",code,"name:",newMutualFundManagerInfo.name
             i += 1
             newMutualFundManagerInfo.fundType = tds[i].get_text()
-            print newMutualFundManagerInfo.fundType
             i += 1
             newMutualFundManagerInfo.fundScale = convertStringToFloat(tds[i].get_text())
-            print newMutualFundManagerInfo.fundScale
             i += 2
             newMutualFundManagerInfo.manager = tds[i].find("a").get_text()
             totalLength = convertDateStringToInt(tds[i].get_text())
             newMutualFundManagerInfo.totalLength  = totalLength
             newMutualFundManagerInfo.totalStart = time.strftime('%Y-%m-%d',time.localtime(time.time() - totalLength*24*60*60))
-            print newMutualFundManagerInfo.totalStart, ",",newMutualFundManagerInfo.totalLength
             i += 1
             manageLength = convertDateStringToInt(tds[i].get_text())
             newMutualFundManagerInfo.manageLength = manageLength
             newMutualFundManagerInfo.manageStart = time.strftime('%Y-%m-%d',time.localtime(time.time() - manageLength*24*60*60))
-            print newMutualFundManagerInfo.manageStart,",",newMutualFundManagerInfo.manageLength
             i += 1
             newMutualFundManagerInfo.manageAchive = convertStringToFloat(tds[i].get_text())
-            print newMutualFundManagerInfo.manageAchive
             i += 1
             newMutualFundManagerInfo.manageAvgAchive = convertStringToFloat(tds[i].get_text())
-            print newMutualFundManagerInfo.manageAvgAchive
             newMutualFundManagerInfo.updateDate = date
-            print "newMutualFundManagerInfo is:",newMutualFundManagerInfo
             newMutualFundManagerInfo.save()
-        return {"msg":"ok"}
+    return {"msg":"ok"}
 
 def requestData(reqUrl):
     headers = {
