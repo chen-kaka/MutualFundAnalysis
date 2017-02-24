@@ -73,6 +73,7 @@ class MutualFundManagerInfo(models.Model):
     fundType = models.CharField(max_length=200)                # 基金类型
     fundScale = models.FloatField()                       # 基金规模(亿)
     manager = models.CharField(max_length=200)                     # 基金经理
+    managerId = models.CharField(max_length=200,default='')                     # 基金经理ID
     totalStart = models.DateField()                     # 累计公募任职开始时间
     totalLength = models.IntegerField()                     # 累计公募任职长度
     manageStart = models.DateField()                       # 任职开始时间

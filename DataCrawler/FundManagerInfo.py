@@ -52,6 +52,9 @@ def fetchMutualFundManagerData():
             newMutualFundManagerInfo.fundScale = convertStringToFloat(tds[i].get_text())
             i += 2
             newMutualFundManagerInfo.manager = tds[i].find("a").get_text()
+            managersrc = tds[i].find("a").get('href')  #managerhistory.aspx?managerid=2125634
+            newMutualFundManagerInfo.managerId = managersrc.split('=')[1]
+
             totalLength = convertDateStringToInt(tds[i].get_text())
             newMutualFundManagerInfo.totalLength  = totalLength
             newMutualFundManagerInfo.totalStart = time.strftime('%Y-%m-%d',time.localtime(time.time() - totalLength*24*60*60))
