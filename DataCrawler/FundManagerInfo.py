@@ -12,12 +12,13 @@ def fetchMutualFundManagerData():
     reqUrl = "http://cn2.morningstar.com/fundmanagers/default.aspx"
     print "reqUrl is:", reqUrl
 
-    tmp = open("/Users/kakachan/Desktop/fundmanager.htm")
-    print "BeautifulSoup processing."
-    soup = BeautifulSoup(tmp, "lxml")
+    # tmp = open("/Users/kakachan/Desktop/fundmanager.htm")
+    # print "BeautifulSoup processing."
+    # soup = BeautifulSoup(tmp, "lxml")
 
-    # responseHtml = requestData(reqUrl)
-    # soup = BeautifulSoup(responseHtml.text, "lxml")
+    responseHtml = requestData(reqUrl)
+    print "BeautifulSoup processing."
+    soup = BeautifulSoup(responseHtml.text, "lxml")
     # print responseHtml.text
     # print soup.prettify()
 
@@ -71,16 +72,6 @@ def fetchMutualFundManagerData():
     return {"msg":"ok"}
 
 def requestData(reqUrl):
-    headers = {
-        "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language":"zh-CN,zh;q=0.8",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Accept-Encoding":"gzip, deflate, br",
-        "Referer":"http://cn2.morningstar.com/quickrank/default.aspx",
-        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36",
-        "Host":"cn2.morningstar.com",
-        "Origin":"http://cn2.morningstar.com"
-    }
     responseHtml = requests.get(reqUrl)
 
     return responseHtml
