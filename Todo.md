@@ -17,4 +17,12 @@
 
 http://fund.eastmoney.com/data/rankhandler.aspx?op=ph&dt=kf&ft=all&rs=&gs=0&sc=zzf&st=desc&sd=2016-02-17&ed=2017-02-17&qdii=&tabSubtype=,,,,,&pi=1&pn=50&dx=1&v=0.490634018971817
 
--
+- 为Django框架添加管理员密码校验
+
+http://www.runoob.com/django/django-admin-manage-tool.html
+
+python manage.py createsuperuser
+
+username: kakachan
+password: chen********
+

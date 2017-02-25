@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+admin.autodiscover()
 
 from Controller import fetchMutualData
 from MutualFundAnalysis import search
