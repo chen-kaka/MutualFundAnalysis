@@ -26,41 +26,41 @@ def selectFund():
     passClosedFundSize = 0
     passAllUpZeroSize = 0
     passFundNotOneTwoSize = 0
+    targetList = []
     for index in range(0, len(betterThanAvgsFunds)):
         considerItem = betterThanAvgsFunds[index]
-        applyStateOk = False
         itemCode = considerItem.code
-        if openStateFundsMap.has_key(itemCode):
-            applyStateOk = True
-            break
-        if applyStateOk == False:
+
+        if openStateFundsMap.has_key(itemCode) == False:
             continue
         passClosedFundSize += 1
         #同时1年,2年,3年,5年回报都得大于等于0,且设立以来的回报都要大于0
-        returnStateOk = False
-        if returnInfoMap.has_key(considerItem.code):
-            returnStateOk = True
-            break
-        if returnStateOk == False:
+        if returnInfoMap.has_key(considerItem.code) == False:
             continue
         passAllUpZeroSize += 1
         #过滤掉基金评级在1,2级的基金
-        returnRatingOk = False
-        if fundRatingMap.has_key(considerItem.code):
-            returnRatingOk = True
-            break
-        if returnRatingOk == False:
+        if fundRatingMap.has_key(considerItem.code) == False:
             continue
         passFundNotOneTwoSize += 1
+        #查询出这些基金的 三年标准差、 三年晨星风险系数、 三年夏普比例
+        returnInfo = returnInfoMap.get(considerItem.code)
+        threeYearStandard = returnInfo.threeYearStandard
+
+        fundRatingInfo = fundRatingMap.get(considerItem.code)
+        threeYearRisk = fundRatingInfo.DR3Year
+        threeYearSharp = fundRatingInfo.SR3Year
+
+        considerItem.threeYearStandard = threeYearStandard
+        considerItem.threeYearRisk = threeYearRisk
+        considerItem.threeYearSharp = threeYearSharp
+        targetList.append(considerItem)
     print 'passClosedFundSize:',passClosedFundSize, 'passAllUpZeroSize:',passAllUpZeroSize,'passFundNotOneTwoSize:',passFundNotOneTwoSize
-    #查询出这些基金的 三年标准差、 三年晨星风险系数、 三年夏普比例
-
     # 根据 三年夏普比例 由高到低排序
-
-    # 根据 三年晨星风险系数 由小到大排序
-
+    sharpTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearSharp)
+    for i in range(0,10):
+        print "code:",sharpTargetList[i].code,",threeYearSharp:",sharpTargetList[i].threeYearSharp
+     # 根据 三年晨星风险系数 由小到大排序
     #获取每个查询集合的前20名
-
     # 根据 三年标准差 由小到大排序
 
     return {"ok":True}
@@ -71,4 +71,5 @@ def convertListToMap(list):
         item = list[index]
         code = item.code
         map[code] = item
+    print "map:",len(map)
     return map
