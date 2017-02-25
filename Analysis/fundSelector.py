@@ -58,12 +58,12 @@ def selectFund():
     # 根据 三年夏普比例 由高到低排序
     sharpTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearSharp, reverse=True)
     for i in range(0,10):
-        print "code:",sharpTargetList[i].code,",threeYearSharp:",sharpTargetList[i].threeYearSharp
+        print "code:",sharpTargetList[i].code,",name:",sharpTargetList[i].name,",threeYearSharp:",sharpTargetList[i].threeYearSharp
     # 根据 三年晨星风险系数 由小到大排序
     print "--------------------------------------------------"
     riskTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearRisk)
     for i in range(0,10):
-        print "code:",riskTargetList[i].code,",threeYearRisk:",riskTargetList[i].threeYearRisk
+        print "code:",riskTargetList[i].code,",name:",riskTargetList[i].name,",threeYearRisk:",riskTargetList[i].threeYearRisk
     #获取每个查询集合的前20名
     # 根据 三年标准差 由小到大排序
 
