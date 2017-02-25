@@ -26,3 +26,18 @@ python manage.py createsuperuser
 username: kakachan
 password: chen********
 
+- 使用功能帮助:
+
+http://www.oschina.net/translate/why-you-should-use-the-django-admin-9-tips
+
+可以在展示的时候进行数据过滤
+
+添加动作(action)
+
+搜索
+
+- 为基金经理添加过滤排序
+
+- 为基金经理详情添加过滤排序
+
+- 添加基金筛选公式
