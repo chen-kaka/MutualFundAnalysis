@@ -4,6 +4,7 @@ import json
 from django.http import HttpResponse
 from Service import fetchFundData,fetchNetData,fetchBankGoldData
 from DataCrawler import Requester,FundBuyinfo,FundReturnInfo,FundManagerInfo,FundManagerDetail
+from Analysis import fundSelector
 
 #拉取基金基本数据
 def fetchMutualFundDataReq(request):
@@ -51,4 +52,11 @@ def fetchFundManagerInfoReq(request):
 def fetchFundManagerDetailReq(request):
     request.encoding='utf-8'
     responseData = FundManagerDetail.fetchMutualFundDetailData()
+    return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+
+#拉取基金筛选结果数据
+def fetchFundSelectReq(request):
+    request.encoding='utf-8'
+    responseData = fundSelector.selectFund()
     return HttpResponse(json.dumps(responseData), content_type="application/json")

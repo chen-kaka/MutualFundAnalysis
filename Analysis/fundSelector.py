@@ -1,19 +1,58 @@
 # -*- coding: utf-8 -*-
 
+from django.db.models import F
+from django.db.models import Q
 from Model.fundselector import FundRecommend
 from Model.morningstar import MutualFundManagerInfo,MutualFundManagerDetail,MutualFundReturnInfo,MutualFundBuyInfo,MutualFundRating
 
 def selectFund():
     #筛选出所有基金经理管理期业绩好于管理期同类平均业绩的基金
-    betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive >= manageAvgAchive )
+    betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive__gte=F('manageAvgAchive'))
 
     print 'betterThanAvgsFunds length is: ', len(betterThanAvgsFunds)
     #过滤掉所有非"开放"的基金
-
-    #同时1年,2年,3年,5年回报都得大于等于0,且设立以来的回报都要大于0
-
-    #过滤掉基金评级在1,2级的基金
-
+    openStateFunds = MutualFundBuyInfo.objects.filter(applyState='开放' , returnState='开放')
+    print 'openStateFunds length is: ', len(openStateFunds)
+    openStateFundsMap = convertListToMap(openStateFunds)
+    returnInfoList = MutualFundReturnInfo.objects.filter(oneYearReturn__gte=0,
+                                                         twoYearReturn__gte=0,
+                                                         threeYearReturn__gte=0,
+                                                         fiveYearReturn__gte=0)
+    print 'returnInfoList length is: ', len(returnInfoList)
+    returnInfoMap = convertListToMap(returnInfoList)
+    fundRatingList = MutualFundRating.objects.filter(StarRating3__gte=3, StarRating5__gte=3)
+    print 'fundRatingList length is: ', len(fundRatingList)
+    fundRatingMap = convertListToMap(fundRatingList)
+    passClosedFundSize = 0
+    passAllUpZeroSize = 0
+    passFundNotOneTwoSize = 0
+    for index in range(0, len(betterThanAvgsFunds)):
+        considerItem = betterThanAvgsFunds[index]
+        applyStateOk = False
+        itemCode = considerItem.code
+        if openStateFundsMap.has_key(itemCode):
+            applyStateOk = True
+            break
+        if applyStateOk == False:
+            continue
+        passClosedFundSize += 1
+        #同时1年,2年,3年,5年回报都得大于等于0,且设立以来的回报都要大于0
+        returnStateOk = False
+        if returnInfoMap.has_key(considerItem.code):
+            returnStateOk = True
+            break
+        if returnStateOk == False:
+            continue
+        passAllUpZeroSize += 1
+        #过滤掉基金评级在1,2级的基金
+        returnRatingOk = False
+        if fundRatingMap.has_key(considerItem.code):
+            returnRatingOk = True
+            break
+        if returnRatingOk == False:
+            continue
+        passFundNotOneTwoSize += 1
+    print 'passClosedFundSize:',passClosedFundSize, 'passAllUpZeroSize:',passAllUpZeroSize,'passFundNotOneTwoSize:',passFundNotOneTwoSize
     #查询出这些基金的 三年标准差、 三年晨星风险系数、 三年夏普比例
 
     # 根据 三年夏普比例 由高到低排序
@@ -23,3 +62,13 @@ def selectFund():
     #获取每个查询集合的前20名
 
     # 根据 三年标准差 由小到大排序
+
+    return {"ok":True}
+
+def convertListToMap(list):
+    map = {}
+    for index in range(0, len(list)):
+        item = list[index]
+        code = item.code
+        map[code] = item
+    return map
