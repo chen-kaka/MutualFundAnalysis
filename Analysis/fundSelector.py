@@ -7,7 +7,7 @@ from Model.morningstar import MutualFundManagerInfo,MutualFundManagerDetail,Mutu
 
 def selectFund():
     #筛选出所有基金经理管理期业绩好于管理期同类平均业绩的基金
-    betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive__gte=F('manageAvgAchive'))
+    betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive__gte=F('manageAvgAchive'),onPosition=1)
 
     print 'betterThanAvgsFunds length is: ', len(betterThanAvgsFunds)
     #过滤掉所有非"开放"的基金
@@ -56,10 +56,14 @@ def selectFund():
         targetList.append(considerItem)
     print 'passClosedFundSize:',passClosedFundSize, 'passAllUpZeroSize:',passAllUpZeroSize,'passFundNotOneTwoSize:',passFundNotOneTwoSize
     # 根据 三年夏普比例 由高到低排序
-    sharpTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearSharp)
+    sharpTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearSharp, reverse=True)
     for i in range(0,10):
         print "code:",sharpTargetList[i].code,",threeYearSharp:",sharpTargetList[i].threeYearSharp
-     # 根据 三年晨星风险系数 由小到大排序
+    # 根据 三年晨星风险系数 由小到大排序
+    print "--------------------------------------------------"
+    riskTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearRisk)
+    for i in range(0,10):
+        print "code:",riskTargetList[i].code,",threeYearRisk:",riskTargetList[i].threeYearRisk
     #获取每个查询集合的前20名
     # 根据 三年标准差 由小到大排序
 
