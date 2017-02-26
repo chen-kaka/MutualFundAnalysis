@@ -29,9 +29,14 @@ def selectFund():
     passAllUpZeroSize = 0
     passFundNotOneTwoSize = 0
     targetList = []
+    processed = {}
     for index in range(0, len(betterThanAvgsFunds)):
         considerItem = betterThanAvgsFunds[index]
         itemCode = considerItem.code
+
+        if processed.has_key(itemCode):
+            continue
+        processed[itemCode] = True
 
         if openStateFundsMap.has_key(itemCode) == False:
             continue
@@ -124,6 +129,11 @@ def selectFund():
         fundRecommend.fiveYearReturn = standardTargetList[i].fiveYearReturn
         fundRecommend.tenYearReturn = standardTargetList[i].tenYearReturn
         fundRecommend.totalReturn = standardTargetList[i].totalReturn
+
+        fundRecommend.manager = standardTargetList[i].manager
+        fundRecommend.manageAchive = standardTargetList[i].manageAchive
+        fundRecommend.manageAvgAchive = standardTargetList[i].manageAvgAchive
+
         fundRecommend.rank = i+1
         fundRecommend.save()
     print "total size:",len(standardTargetList)

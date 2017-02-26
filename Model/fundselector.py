@@ -27,9 +27,9 @@ class FundRecommend(models.Model):
     tenYearReturn = models.FloatField(default=0)                      # 10年年化回报
     totalReturn = models.FloatField(default=0)                       #设立以来回报
 
-    manager = models.CharField(max_length=200)                     # 基金经理
-    manageAchive = models.FloatField()                       # 管理期业绩
-    manageAvgAchive = models.FloatField()                      # 管理期同类平均业绩
+    manager = models.CharField(max_length=200,default='')                     # 基金经理
+    manageAchive = models.FloatField(default=0)                       # 管理期业绩
+    manageAvgAchive = models.FloatField(default=0)                      # 管理期同类平均业绩
 
     updateDate = models.CharField(max_length=200)
     def __unicode__(self):
