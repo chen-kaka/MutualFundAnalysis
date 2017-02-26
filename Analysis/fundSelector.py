@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import time
 from django.db.models import F
 from django.db.models import Q
 from Model.fundselector import FundRecommend
 from Model.morningstar import MutualFundManagerInfo,MutualFundManagerDetail,MutualFundReturnInfo,MutualFundBuyInfo,MutualFundRating
 
 def selectFund():
+    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
     #筛选出所有基金经理管理期业绩好于管理期同类平均业绩的基金
     betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive__gte=F('manageAvgAchive'),onPosition=1)
 
@@ -44,7 +46,18 @@ def selectFund():
         passFundNotOneTwoSize += 1
         #查询出这些基金的 三年标准差、 三年晨星风险系数、 三年夏普比例
         returnInfo = returnInfoMap.get(considerItem.code)
+        print "returnInfo oneWeekReturn:",returnInfo.oneWeekReturn
         threeYearStandard = returnInfo.threeYearStandard
+        considerItem.oneWeekReturn = returnInfo.oneWeekReturn
+        considerItem.oneMonthReturn = returnInfo.oneMonthReturn
+        considerItem.threeMonthReturn = returnInfo.threeMonthReturn
+        considerItem.sixMonthReturn = returnInfo.sixMonthReturn
+        considerItem.oneYearReturn = returnInfo.oneYearReturn
+        considerItem.twoYearReturn = returnInfo.twoYearReturn
+        considerItem.threeYearReturn = returnInfo.threeYearReturn
+        considerItem.fiveYearReturn = returnInfo.fiveYearReturn
+        considerItem.tenYearReturn = returnInfo.tenYearReturn
+        considerItem.totalReturn = returnInfo.totalReturn
 
         fundRatingInfo = fundRatingMap.get(considerItem.code)
 
@@ -84,6 +97,8 @@ def selectFund():
     print "bothExistedLists size is:",len(bothExistedLists),", bothExistedLists is:",bothExistedLists
     # 根据 三年标准差 由小到大排序
     standardTargetList = sorted(bothExistedLists, key=lambda targetItem: targetItem.threeYearStandard)
+    # delete all
+    FundRecommend.objects.all().delete()
     for i in range(0,len(standardTargetList)):
         print "====final result: code:",standardTargetList[i].code,",name:",standardTargetList[i].name,\
             ",threeYearRisk:",standardTargetList[i].threeYearRisk,", threeYearSharp:",\
@@ -91,6 +106,26 @@ def selectFund():
             standardTargetList[i].threeYearStandard,", StarRating3:", \
             standardTargetList[i].StarRating3,", StarRating5:", \
             standardTargetList[i].StarRating5
+        fundRecommend = FundRecommend(code=standardTargetList[i].code, name=standardTargetList[i].name)
+        fundRecommend.threeYearSharp = standardTargetList[i].threeYearSharp
+        fundRecommend.threeYearStandard = standardTargetList[i].threeYearStandard
+        fundRecommend.threeYearRisk = standardTargetList[i].threeYearRisk
+        fundRecommend.StarRating3 = standardTargetList[i].StarRating3
+        fundRecommend.StarRating5 = standardTargetList[i].StarRating5
+        fundRecommend.updateDate = date
+
+        fundRecommend.oneWeekReturn = standardTargetList[i].oneWeekReturn
+        fundRecommend.oneMonthReturn = standardTargetList[i].oneMonthReturn
+        fundRecommend.threeMonthReturn = standardTargetList[i].threeMonthReturn
+        fundRecommend.sixMonthReturn = standardTargetList[i].sixMonthReturn
+        fundRecommend.oneYearReturn = standardTargetList[i].oneYearReturn
+        fundRecommend.twoYearReturn = standardTargetList[i].twoYearReturn
+        fundRecommend.threeYearReturn = standardTargetList[i].threeYearReturn
+        fundRecommend.fiveYearReturn = standardTargetList[i].fiveYearReturn
+        fundRecommend.tenYearReturn = standardTargetList[i].tenYearReturn
+        fundRecommend.totalReturn = standardTargetList[i].totalReturn
+        fundRecommend.rank = i+1
+        fundRecommend.save()
     print "total size:",len(standardTargetList)
     return {"ok":True}
 
