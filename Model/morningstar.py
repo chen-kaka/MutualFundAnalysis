@@ -23,7 +23,7 @@ class MutualFundRating(models.Model):
     ReturnYTD = models.FloatField()           # 今年总回报率
     updateDate = models.CharField(max_length=200)
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
 
 
 #晨星基金购买信息
@@ -42,7 +42,7 @@ class MutualFundBuyInfo(models.Model):
     serviceFee = models.FloatField()                      # 销售服务费
     updateDate = models.CharField(max_length=200)         #更新日期
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
 
 
 #晨星基金回报信息
@@ -64,7 +64,7 @@ class MutualFundReturnInfo(models.Model):
     threeYearRisk = models.FloatField()                     #三年晨星风险系数  越低越好
     updateDate = models.CharField(max_length=200)         #更新日期
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
 
 
 #晨星经理信息
@@ -83,7 +83,7 @@ class MutualFundManagerInfo(models.Model):
     manageAvgAchive = models.FloatField()                      # 管理期同类平均业绩  空的
     updateDate = models.CharField(max_length=200)         #更新日期
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
 
 
 #晨星基金经理详细信息
@@ -103,7 +103,7 @@ class MutualFundManagerDetail(models.Model):
     manageAvgAchive = models.FloatField()                      # 管理期同类平均业绩
     updateDate = models.CharField(max_length=200)         #更新日期
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
 
 
 

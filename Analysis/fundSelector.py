@@ -20,7 +20,7 @@ def selectFund():
                                                          fiveYearReturn__gte=0)
     print 'returnInfoList length is: ', len(returnInfoList)
     returnInfoMap = convertListToMap(returnInfoList)
-    fundRatingList = MutualFundRating.objects.filter(StarRating3__gte=3, StarRating5__gte=3)
+    fundRatingList = MutualFundRating.objects.filter(StarRating3__gte=2, StarRating5__gte=2)
     print 'fundRatingList length is: ', len(fundRatingList)
     fundRatingMap = convertListToMap(fundRatingList)
     passClosedFundSize = 0
@@ -47,12 +47,18 @@ def selectFund():
         threeYearStandard = returnInfo.threeYearStandard
 
         fundRatingInfo = fundRatingMap.get(considerItem.code)
+
         threeYearRisk = fundRatingInfo.DR3Year
         threeYearSharp = fundRatingInfo.SR3Year
+        #三、五年评级
+        StarRating3 = fundRatingInfo.StarRating3
+        StarRating5 = fundRatingInfo.StarRating5
 
         considerItem.threeYearStandard = threeYearStandard
         considerItem.threeYearRisk = threeYearRisk
         considerItem.threeYearSharp = threeYearSharp
+        considerItem.StarRating3 = StarRating3
+        considerItem.StarRating5 = StarRating5
         targetList.append(considerItem)
     print 'passClosedFundSize:',passClosedFundSize, 'passAllUpZeroSize:',passAllUpZeroSize,'passFundNotOneTwoSize:',passFundNotOneTwoSize
     # 根据 三年夏普比例 由高到低排序
@@ -64,9 +70,28 @@ def selectFund():
     riskTargetList = sorted(targetList, key=lambda targetItem: targetItem.threeYearRisk)
     for i in range(0,10):
         print "code:",riskTargetList[i].code,",name:",riskTargetList[i].name,",threeYearRisk:",riskTargetList[i].threeYearRisk
-    #获取每个查询集合的前20名
+    #获取每个查询集合的前30名中重叠的部分
+    sharpTargetListLength = len(sharpTargetList)
+    riskTargetListLength = len(riskTargetList)
+    print "sharpTargetList length:",sharpTargetListLength,",and riskTargetList length:",riskTargetListLength
+    riskTargetCodeMap = {}
+    for i in range(0,50):
+        riskTargetCodeMap[riskTargetList[i].code] = True
+    bothExistedLists = []
+    for i in range(0,50):
+        if riskTargetCodeMap.has_key(sharpTargetList[i].code):
+            bothExistedLists.append(sharpTargetList[i])
+    print "bothExistedLists size is:",len(bothExistedLists),", bothExistedLists is:",bothExistedLists
     # 根据 三年标准差 由小到大排序
-
+    standardTargetList = sorted(bothExistedLists, key=lambda targetItem: targetItem.threeYearStandard)
+    for i in range(0,len(standardTargetList)):
+        print "====final result: code:",standardTargetList[i].code,",name:",standardTargetList[i].name,\
+            ",threeYearRisk:",standardTargetList[i].threeYearRisk,", threeYearSharp:",\
+            standardTargetList[i].threeYearSharp,", threeYearStandard:",\
+            standardTargetList[i].threeYearStandard,", StarRating3:", \
+            standardTargetList[i].StarRating3,", StarRating5:", \
+            standardTargetList[i].StarRating5
+    print "total size:",len(standardTargetList)
     return {"ok":True}
 
 def convertListToMap(list):
