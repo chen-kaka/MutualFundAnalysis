@@ -16,9 +16,9 @@ def selectFund():
     openStateFunds = MutualFundBuyInfo.objects.filter(applyState='开放' , returnState='开放')
     print 'openStateFunds length is: ', len(openStateFunds)
     openStateFundsMap = convertListToMap(openStateFunds)
-    returnInfoList = MutualFundReturnInfo.objects.filter(oneYearReturn__gte=0,
-                                                         twoYearReturn__gte=0,
-                                                         threeYearReturn__gte=0,
+    returnInfoList = MutualFundReturnInfo.objects.filter(oneYearReturn__gte=10,
+                                                         twoYearReturn__gte=10,
+                                                         threeYearReturn__gte=10,
                                                          fiveYearReturn__gte=0)
     print 'returnInfoList length is: ', len(returnInfoList)
     returnInfoMap = convertListToMap(returnInfoList)
@@ -77,6 +77,10 @@ def selectFund():
         considerItem.threeYearSharp = threeYearSharp
         considerItem.StarRating3 = StarRating3
         considerItem.StarRating5 = StarRating5
+
+        openStateInfo = openStateFundsMap.get(considerItem.code)
+        considerItem.establishDate = openStateInfo.establishDate
+
         targetList.append(considerItem)
     print 'passClosedFundSize:',passClosedFundSize, 'passAllUpZeroSize:',passAllUpZeroSize,'passFundNotOneTwoSize:',passFundNotOneTwoSize
     # 根据 三年夏普比例 由高到低排序
@@ -100,8 +104,8 @@ def selectFund():
         if riskTargetCodeMap.has_key(sharpTargetList[i].code):
             bothExistedLists.append(sharpTargetList[i])
     print "bothExistedLists size is:",len(bothExistedLists),", bothExistedLists is:",bothExistedLists
-    # 根据 三年标准差 由小到大排序
-    standardTargetList = sorted(bothExistedLists, key=lambda targetItem: targetItem.threeYearStandard)
+    # 根据 三年标准差 由小到大排序, 目标: 在确定一定数量的基金以后
+    standardTargetList = bothExistedLists #sorted(bothExistedLists, key=lambda targetItem: targetItem.threeYearStandard)
     # delete all
     FundRecommend.objects.all().delete()
     for i in range(0,len(standardTargetList)):
@@ -131,6 +135,9 @@ def selectFund():
         fundRecommend.totalReturn = standardTargetList[i].totalReturn
 
         fundRecommend.manager = standardTargetList[i].manager
+        fundRecommend.resum = standardTargetList[i].resum
+        fundRecommend.establishDate = standardTargetList[i].establishDate
+        fundRecommend.manageStart = standardTargetList[i].manageStart
         fundRecommend.manageAchive = standardTargetList[i].manageAchive
         fundRecommend.manageAvgAchive = standardTargetList[i].manageAvgAchive
 

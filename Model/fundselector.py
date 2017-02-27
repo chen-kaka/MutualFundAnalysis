@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-
+from datetime import datetime
 from django.db import models
 
 # Create your models here.
@@ -30,6 +30,10 @@ class FundRecommend(models.Model):
     manager = models.CharField(max_length=200,default='')                     # 基金经理
     manageAchive = models.FloatField(default=0)                       # 管理期业绩
     manageAvgAchive = models.FloatField(default=0)                      # 管理期同类平均业绩
+
+    establishDate = models.CharField(max_length=200,default='')         # 成立日期
+    manageStart = models.DateField(default=datetime.now, blank=True)                       # 任职开始时间
+    resum = models.CharField(max_length=1000,default='')       # 基金经理介绍
 
     updateDate = models.CharField(max_length=200)
     def __unicode__(self):
