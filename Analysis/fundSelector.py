@@ -108,6 +108,11 @@ def selectFund():
     standardTargetList = bothExistedLists #sorted(bothExistedLists, key=lambda targetItem: targetItem.threeYearStandard)
     # delete all
     FundRecommend.objects.all().delete()
+
+    # find all manager info
+    fundManagerList = MutualFundManagerInfo.objects.all()
+    fundManagerMap = convertListToMap(fundManagerList)
+
     for i in range(0,len(standardTargetList)):
         print "====final result: code:",standardTargetList[i].code,",name:",standardTargetList[i].name,\
             ",threeYearRisk:",standardTargetList[i].threeYearRisk,", threeYearSharp:",\
@@ -140,6 +145,9 @@ def selectFund():
         fundRecommend.manageStart = standardTargetList[i].manageStart
         fundRecommend.manageAchive = standardTargetList[i].manageAchive
         fundRecommend.manageAvgAchive = standardTargetList[i].manageAvgAchive
+
+        fundManagerInfo = fundManagerMap.get(standardTargetList[i].code)
+        fundRecommend.totalStart = fundManagerInfo.totalStart
 
         fundRecommend.rank = i+1
         fundRecommend.save()

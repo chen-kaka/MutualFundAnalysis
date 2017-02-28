@@ -35,6 +35,8 @@ class FundRecommend(models.Model):
     manageStart = models.DateField(default=datetime.now, blank=True)                       # 任职开始时间
     resum = models.CharField(max_length=1000,default='')       # 基金经理介绍
 
+    totalStart = models.DateField(default=datetime.now, blank=True)                     # 累计公募任职开始时间
+
     updateDate = models.CharField(max_length=200)
     def __unicode__(self):
-        return self.name
+        return self.code + "--" + self.name
