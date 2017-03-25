@@ -2,9 +2,10 @@
 
 import json
 from django.http import HttpResponse
-from Service import fetchFundData,fetchNetData,fetchBankGoldData
+from Service import fetchFundData,fetchNetData,fetchBankGoldData,fundRecomend
 from DataCrawler import Requester,FundBuyinfo,FundReturnInfo,FundManagerInfo,FundManagerDetail
 from Analysis import fundSelector
+
 
 #拉取基金基本数据
 def fetchMutualFundDataReq(request):
@@ -60,3 +61,11 @@ def fetchFundSelectReq(request):
     request.encoding='utf-8'
     responseData = fundSelector.selectFund()
     return HttpResponse(json.dumps(responseData), content_type="application/json")
+
+#拉取推荐基金筛选结果数据
+def fetchFundRecomendReq(request):
+    request.encoding='utf-8'
+    responseData = fundRecomend.getRecommendList()
+    response = HttpResponse(responseData, content_type="application/json")
+    response['Access-Control-Allow-Origin'] = '*'
+    return response

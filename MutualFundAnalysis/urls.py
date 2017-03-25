@@ -51,7 +51,7 @@ urlpatterns = [
     # http://localhost:8000/mutual_fund/fetch_managerdetail
     url(r'^mutual_fund/fetch_managerdetail/$', fetchMutualData.fetchFundManagerDetailReq),
     # http://localhost:8000/mutual_fund/fetch_fundselect
-    url(r'^mutual_fund/fetch_fundselect/$', fetchMutualData.fetchFundSelectReq)
-
-
+    url(r'^mutual_fund/fetch_fundselect/$', fetchMutualData.fetchFundSelectReq),
+    # http://localhost:8000/mutual_fund/fetch_fundrecomend
+    url(r'^mutual_fund/fetch_fundrecomend/$', fetchMutualData.fetchFundRecomendReq)
 ]
