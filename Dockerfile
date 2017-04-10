@@ -1,4 +1,4 @@
-FROM daocloud.io/django:onbuild
+FROM daocloud.io/django:1.7.1
 MAINTAINER chen_kaka <chen-kaka@163.com>
 
 RUN mkdir -p /opt/MutualFundAnalysis
@@ -9,4 +9,4 @@ EXPOSE 22
 EXPOSE 8000
 
 WORKDIR /opt/MutualFundAnalysis
-CMD python manage.py runserver 0.0.0.0:8000 && tail -f /etc/hosts
+CMD pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000 && tail -f /etc/hosts
