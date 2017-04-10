@@ -12,4 +12,5 @@ if [ -n "$imageId" ]; then
 fi
 
 docker run  -d -p 8000:8000 \
-    --name=mutualfundanalysis-$ver mutualfundanalysis:$ver
+    --name=mutualfundanalysis-$ver mutualfundanalysis:$ver \
+    bash -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
