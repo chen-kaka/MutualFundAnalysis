@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  #  or mysql.connector.django
         'NAME': 'mutualfund',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Root123456@',
         'HOST':'localhost',
         'PORT':'3306',
     }
