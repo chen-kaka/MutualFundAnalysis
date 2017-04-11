@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Model',
     'django_crontab',
+    'gunicorn',
 ]
 
 MIDDLEWARE = [
