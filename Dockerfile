@@ -9,3 +9,6 @@ EXPOSE 22
 EXPOSE 8000
 
 WORKDIR /opt/MutualFundAnalysis
+RUN pip install -r requirements.txt
+
+CMD python manage.py runserver 0.0.0.0:8000 && tail -f /etc/hosts
