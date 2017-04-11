@@ -25,7 +25,7 @@ SECRET_KEY = '(2&4-(bli)h=w-1nbz44o%g!^y9%pleopkyo7*y2+c@qml*2p$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fund.xy-kaka.cn','localhost']
 
 # Application definition
 
