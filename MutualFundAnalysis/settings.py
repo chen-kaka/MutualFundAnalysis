@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Model',
     'django_crontab',
-    'gunicorn',
 ]
 
 MIDDLEWARE = [
@@ -127,5 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRONJOBS = (
-    ('* * * * *', 'Crontab.scheduleFetchFundData.testScheduler', '> /Users/kakachan/src/mine/quant/MutualFundAnalysis/Logs/scheduled_job.log'),
+    ('* * * * *', 'Crontab.scheduleFetchFundData.testScheduler', '>> /var/log/mutualfund/scheduled_job.log'),
+    ('* * * * *', 'Crontab.scheduleFetchFundData.fetchBankGoldDataScheduler', '>> /var/log/mutualfund/fetchBankGoldDataScheduler.log'),
 )

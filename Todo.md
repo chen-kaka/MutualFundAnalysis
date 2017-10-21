@@ -56,3 +56,8 @@ http://www.oschina.net/translate/why-you-should-use-the-django-admin-9-tips
 5、录入购买的基金以及购买价格,每日更新基金信息并推送或展示。
 
 6、根据基金期望收益, 能承担的风险水平进行基金推荐。
+
+
+基金涨幅情况：
+
+https://fundmobapitest.eastmoney.com/FundMApi/FundPeriodIncrease.ashx?FCODE=001938&deviceid=Wap&plat=Wap&product=EFund&version=2.0.0
