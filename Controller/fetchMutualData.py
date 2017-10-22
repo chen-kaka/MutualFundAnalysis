@@ -56,13 +56,13 @@ def fetchFundManagerDetailReq(request):
     return HttpResponse(json.dumps(responseData), content_type="application/json")
 
 
-#拉取基金筛选结果数据
+#拉取基金筛选结果数据 CGI
 def fetchFundSelectReq(request):
     request.encoding='utf-8'
     responseData = fundSelector.selectFund()
     return HttpResponse(json.dumps(responseData), content_type="application/json")
 
-#拉取推荐基金筛选结果数据
+#拉取推荐基金筛选结果数据 CGI
 def fetchFundRecomendReq(request):
     request.encoding='utf-8'
     responseData = fundRecomend.getRecommendList()

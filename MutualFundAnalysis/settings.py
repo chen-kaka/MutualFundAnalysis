@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 """
 Django settings for DjangoProj project.
 
@@ -126,6 +127,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRONJOBS = (
-    ('* * * * *', 'Crontab.scheduleFetchFundData.testScheduler', '>> /var/log/mutualfund/scheduled_job.log'),
-    ('* * * * *', 'Crontab.scheduleFetchFundData.fetchBankGoldDataScheduler', '>> /var/log/mutualfund/fetchBankGoldDataScheduler.log'),
+    # Minute             每个小时的第几分钟执行该任务
+    # Hour               每天的第几个小时执行该任务
+    # Day                 每月的第几天执行该任务
+    # Month             每年的第几个月执行该任务
+    # DayOfWeek     每周的第几天执行该任务
+    # http://blog.163.com/benita_0/blog/static/25060876201722245448687/
+    ('*/1 * * * *', 'Crontab.scheduleFetchFundData.testScheduler', '>> /var/log/mutualfund/scheduled_job.log 2>&1 &'),
+    ('12 * * * *', 'Crontab.scheduleFetchFundData.fetchBankGoldDataScheduler', '>> /var/log/mutualfund/fetchBankGoldDataScheduler.log 2>&1 &'),
 )

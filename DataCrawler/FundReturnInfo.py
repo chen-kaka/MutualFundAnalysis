@@ -12,7 +12,7 @@ def pagingFetchMutualFundReturnData():
     return {"msg":"ok"}
 
 def fetchMutualFundReturnData():
-    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
     reqUrl = "http://cn2.morningstar.com/fundselect/default.aspx"
     print "reqUrl is:", reqUrl
 

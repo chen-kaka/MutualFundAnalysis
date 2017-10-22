@@ -21,7 +21,7 @@ def fetchMutualFundDetailData():
     return {"msg":"ok"}
 
 def fetchMutualFundEachData(managerId, managerName):
-    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
     reqUrl = "https://cn2.morningstar.com/fundmanagers/managerhistory.aspx?managerid=" + managerId
     print "reqUrl is:", reqUrl
 

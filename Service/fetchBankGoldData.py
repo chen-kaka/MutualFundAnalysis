@@ -2,6 +2,7 @@
 
 from Model.mutualfund import BankGoldData
 from common import convertStringToFloat, fetchJuheData
+import time
 
 # 银行黄金数据
 BankGoldUrl = "http://web.juhe.cn:8080/finance/gold/bankgold"
@@ -15,12 +16,12 @@ def fetchBankGoldDataReq():
         # 写入到数据库
         # 修改其中一个id=1的name字段，再save，相当于SQL中的UPDATE
         variety = fundItem["variety"]
-        time = fundItem["time"]
+        fundTime = fundItem["time"]
         print "fundItem:",fundItem,"save variety:",variety
         savedInfo = BankGoldData.objects.filter(variety=variety)
         if savedInfo :
             savedInfo = savedInfo[0]
-            if time == savedInfo.time:
+            if fundTime == savedInfo.time:
                 print "savedInfo not change, skip."
                 continue
             print "get BankGoldData saved info is: ", savedInfo
@@ -35,7 +36,9 @@ def fetchBankGoldDataReq():
         savedInfo.todayopen = convertStringToFloat(fundItem["todayopen"])
         savedInfo.closeyes = convertStringToFloat(fundItem["closeyes"])
         savedInfo.quantpri = convertStringToFloat(fundItem["quantpri"])
-        savedInfo.time = fundItem["time"]
+        # savedInfo.time = fundItem["time"]
+        date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        savedInfo.time = date
         print "savedInfo is:",savedInfo
         savedInfo.save()
 

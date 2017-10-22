@@ -119,7 +119,8 @@ def fetchMutualFundRatingData(category,categoryName, date, pageindex, pagesize):
         newMutualFundRating.SR3YearComment = tds[i].get_text()
         i += 1
         newMutualFundRating.ReturnYTD = convertStringToFloat(tds[i].get_text())
-        newMutualFundRating.updateDate = date
+        updateDate = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+        newMutualFundRating.updateDate = updateDate
         newMutualFundRating.fundType = categoryName
         print "newMutualFundRating is:",newMutualFundRating
         newMutualFundRating.save()

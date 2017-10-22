@@ -7,7 +7,7 @@ from Model.fundselector import FundRecommend
 from Model.morningstar import MutualFundManagerInfo,MutualFundManagerDetail,MutualFundReturnInfo,MutualFundBuyInfo,MutualFundRating
 
 def selectFund():
-    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
     #筛选出所有基金经理管理期业绩好于管理期同类平均业绩的基金
     betterThanAvgsFunds = MutualFundManagerDetail.objects.filter(manageAchive__gte=F('manageAvgAchive'),onPosition=1)
 

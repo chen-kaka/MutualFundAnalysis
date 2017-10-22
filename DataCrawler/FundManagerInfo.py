@@ -8,7 +8,7 @@ from Service.common import convertStringToFloat,convertDateStringToInt
 
 
 def fetchMutualFundManagerData():
-    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+    date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
     reqUrl = "http://cn2.morningstar.com/fundmanagers/default.aspx"
     print "reqUrl is:", reqUrl
 
