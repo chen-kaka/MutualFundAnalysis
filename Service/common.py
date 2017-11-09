@@ -48,7 +48,7 @@ def fetchJuheData(reqUrl, appkey, params):
             responseResult = responseResult[0]
             print "reqUrl: " , reqUrl + ", fetch list size: " , len(responseResult)
             return responseResult
-    return {}
+    return []
 
 def fetchJuheDataResponse(reqUrl, appkey, params):
     responseHtml = requests.post(reqUrl, data=params)

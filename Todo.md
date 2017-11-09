@@ -61,3 +61,8 @@ http://www.oschina.net/translate/why-you-should-use-the-django-admin-9-tips
 基金涨幅情况：
 
 https://fundmobapitest.eastmoney.com/FundMApi/FundPeriodIncrease.ashx?FCODE=001938&deviceid=Wap&plat=Wap&product=EFund&version=2.0.0
+
+
+创建数据库：
+
+CREATE DATABASE mutualfund DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;
