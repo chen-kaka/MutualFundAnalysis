@@ -20,10 +20,13 @@ def fetchBankGoldDataReq():
             variety = fundItem["variety"]
             fundTime = fundItem["time"]
             print "fundItem:",fundItem,"save variety:",variety
-            savedInfo = BankGoldData.objects.filter(variety=variety)
-            print "savedInfo:",savedInfo
-            if savedInfo :
-                savedInfo = savedInfo[0]
+            savedInfoList = BankGoldData.objects.filter(variety=variety)
+            savedInfo = BankGoldData()
+            if len(savedInfoList) > 0 :
+                savedInfo = savedInfoList[0]
+                if fundTime is not None:
+                    fundTime = fundTime[0: 10]
+                print "===fundTime: ", fundTime, ", save time: ", savedInfo.time
                 if fundTime == savedInfo.time:
                     print "savedInfo not change, skip."
                     continue

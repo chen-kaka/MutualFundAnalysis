@@ -172,3 +172,7 @@ python manage.py crontab remove
 查看已经激活的任务使用:
 
 python manage.py crontab show
+
+创建数据库：
+
+ CREATE DATABASE mutualfund DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;

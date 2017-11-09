@@ -27,8 +27,10 @@ def fetchMutualFundData():
         time = fundItem["time"]
         print "fundItem:",fundItem,"saveCode:",saveCode
         savedInfo = FundFinance.objects.filter(code=saveCode)
-        if savedInfo :
+        print "save info is: ", savedInfo
+        if len(savedInfo) > 0:
             savedInfo = savedInfo[0]
+            print "=====time: ", time, ", save time: ", savedInfo.time
             if time == savedInfo.time:
                 print "savedInfo not change, skip."
                 continue
