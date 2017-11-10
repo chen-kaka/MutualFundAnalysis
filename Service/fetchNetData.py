@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Model.mutualfund import FundNetData
 from common import convertStringToFloat, fetchJuheData, fetchJuheDataResponse, fetchJuheDataSingleMap
+import traceback
 
 # 净值数据
 FundNetDataUrl = "http://japi.juhe.cn/jingzhi/query.from"
@@ -19,18 +20,21 @@ NetDataType = {
 
 #入口
 def fetchNetDataReq():
-    fetchNetDataLength = fetchNetDataAndSaveToDb(FundNetDataUrl, FundNetDataAppkey, NetDataType["全部"])
-    responseData = {
-        "fetchNetData" : fetchNetDataLength
-    }
-    return responseData
+    try:
+        fetchNetDataLength = fetchNetDataAndSaveToDb(FundNetDataUrl, FundNetDataAppkey, NetDataType["全部"])
+        responseData = {
+            "fetchNetData" : fetchNetDataLength
+        }
+        return responseData
+    except:
+        traceback.print_exc()
 
 #拉取净值数据,分页拉取,并写入到DB
 def fetchNetDataAndSaveToDb(reqUrl, appkey, type):
     params = {
         "key" : appkey, #APPKEY值
         "type" : type, # 类型
-        "page" : 1,
+        "page" : 314,
         "pagesize" : 20
     }
 
@@ -39,6 +43,7 @@ def fetchNetDataAndSaveToDb(reqUrl, appkey, type):
     totalLength = responseJson["total"]
     print "fetch net data type: ",type," total length is:",totalLength
     retData = responseJson["result"]
+    print "fetch data length: ", len(retData)
     writeNetDataToDb(retData)
 
     retDataLength = len(retData)
@@ -48,10 +53,11 @@ def fetchNetDataAndSaveToDb(reqUrl, appkey, type):
     print "reqUrl: " , reqUrl + ", fetch list size: " , retDataLength
 
     totalReqPages = totalLength / params["pagesize"] + 1
-    while retDataLength < totalLength:
+    while params["page"] < totalReqPages:
         params["page"] = params["page"] + 1
         print "total page size: ", totalReqPages, ", fetching page num: ", params["page"]
         retData = fetchJuheDataSingleMap(reqUrl, appkey, params)
+        print "fetch data length: ", len(retData)
         retDataLength += len(retData)
         writeNetDataToDb(retData)
 

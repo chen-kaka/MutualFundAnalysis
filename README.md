@@ -176,3 +176,8 @@ python manage.py crontab show
 创建数据库：
 
  CREATE DATABASE mutualfund DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;
+
+
+ update requirements:
+
+ pip freeze >requirements.txt
