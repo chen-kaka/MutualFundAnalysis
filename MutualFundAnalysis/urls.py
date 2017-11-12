@@ -43,6 +43,8 @@ urlpatterns = [
     # http://localhost:8000/mutual_fund/fetch_rating?date=2017-02-17
     url(r'^mutual_fund/fetch_rating/$', fetchMutualData.fetchFundRatingReq),
     # http://localhost:8000/mutual_fund/fetch_buyinfo
+    # 获取基金的费率等信息，晨星接口已经没有这些信息了。
+    # 之后需要再拉取其他的接口
     url(r'^mutual_fund/fetch_buyinfo/$', fetchMutualData.fetchFundBuyInfoReq),
     # http://localhost:8000/mutual_fund/fetch_returninfo
     url(r'^mutual_fund/fetch_returninfo/$', fetchMutualData.fetchFundReturnInfoReq),

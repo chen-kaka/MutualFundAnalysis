@@ -2,14 +2,19 @@
 
 import time
 import requests
+import traceback
 from bs4 import BeautifulSoup
 from Model.morningstar import MutualFundReturnInfo
 from Service.common import convertStringToFloat
 
 def pagingFetchMutualFundReturnData():
-    totalCount = fetchMutualFundReturnData()
-    print "total totalCount: ", totalCount
-    return {"msg":"ok"}
+    try:
+        totalCount = fetchMutualFundReturnData()
+        print "total totalCount: ", totalCount
+        return {"msg":"ok"}
+    except:
+        traceback.print_exc()
+        return {"msg":"failed."}
 
 def fetchMutualFundReturnData():
     date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
