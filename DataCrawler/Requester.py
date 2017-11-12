@@ -3,6 +3,7 @@
 # import re
 import time
 import requests
+import traceback
 from bs4 import BeautifulSoup
 from Model.morningstar import MutualFundRating
 from Service.common import convertStringToFloat
@@ -30,24 +31,32 @@ def requestData(reqUrl):
     return responseHtml
 
 def categoryFetchMutualFundRatingData(reqDate = ''):
-    date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
-    if reqDate != '':
-        date = reqDate
+    try:
+        date = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+        if reqDate != '':
+            date = reqDate
 
-    print 'request date: ', date
-    for category, categoryName in fundType.iteritems():
-        print "type:",category,"name:",categoryName
-        pagingFetchMutualFundRatingData(category,categoryName, date)
-    return {"msg":"ok"}
+        print 'request date: ', date
+        for category, categoryName in fundType.iteritems():
+            print "type:",category,"name:",categoryName
+            isDateCorrect = pagingFetchMutualFundRatingData(category,categoryName, date)
+            if isDateCorrect == 0:
+                return  {"msg":"date incorrect, exit."}
+        return {"msg":"ok"}
+    except:
+        traceback.print_exc()
 
 def pagingFetchMutualFundRatingData(category, categoryName, date):
     pagesize = 500
     totalCount = fetchMutualFundRatingData(category, categoryName, date, 1, pagesize)
 
     reqPages = totalCount / pagesize + 1
-    print "req total pages: ", reqPages
+    print "req total pages: ", reqPages, " and totalCount: ", totalCount
+    if totalCount == 0:
+        return 0
     for index in range(1, reqPages):
         fetchMutualFundRatingData(category, categoryName, date, index+1, pagesize)
+    return 1
 
 
 def fetchMutualFundRatingData(category,categoryName, date, pageindex, pagesize):

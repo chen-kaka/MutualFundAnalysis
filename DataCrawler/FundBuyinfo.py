@@ -2,19 +2,24 @@
 
 import time
 import requests
+import traceback
 from bs4 import BeautifulSoup
 from Model.morningstar import MutualFundBuyInfo
 from Service.common import convertStringToFloatQoutExclude
 
 def pagingFetchMutualFundBuyData():
-    pagesize = 50
-    totalCount = fetchMutualFundBuyData(1)
+    try:
+        pagesize = 50
+        totalCount = fetchMutualFundBuyData(1)
 
-    reqPages = totalCount / pagesize + 1
-    print "req total pages: ", reqPages
-    for index in range(1, reqPages):
-        fetchMutualFundBuyData(index+1)
-    return {"msg":"ok"}
+        reqPages = totalCount / pagesize + 1
+        print "req total pages: ", reqPages
+        for index in range(1, reqPages):
+            fetchMutualFundBuyData(index+1)
+        return {"msg":"ok"}
+    except:
+        traceback.print_exc()
+        return {"msg":"fetch error."}
 
 def fetchMutualFundBuyData(page):
     date = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
@@ -40,10 +45,10 @@ def fetchMutualFundBuyData(page):
     responseHtml = requestData(reqUrl, data)
     soup = BeautifulSoup(responseHtml.text, "lxml")
     # print responseHtml.text
-    print soup.prettify()
+    # print soup.prettify()
 
     summaryData = soup.find(id='ctl00_cphMain_TotalResultLabel')
-    print "summaryData: ",summaryData
+    # print "summaryData: ",summaryData
     if summaryData == None or any(summaryData) == False :
         print "fetch fund buyinfo data error. exit."
         return 0
@@ -56,6 +61,7 @@ def fetchMutualFundBuyData(page):
         tr = trs[index]
         tds = tr.findAll('td')
         print "len: ", len(tds)
+        print "tds: ",tds
         code = tds[2].find("a").get_text()
 
         newMutualFundBuyInfo = MutualFundBuyInfo.objects.filter(code=code)
